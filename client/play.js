@@ -4,5 +4,5 @@ const { stdin } = require('process');
 const { setupInput } = require('./input');
 
 console.log("connecting...");
-connect();
-setupInput();
+const connection = connect();
+setupInput(connection);
