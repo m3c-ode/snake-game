@@ -1,6 +1,8 @@
 const net = require('net');
 const { IP, PORT } = require('./constants');
-const connect = function() {
+const readLine = require('readline');
+
+const connect = function(callback) {
   const conn = net.createConnection({
     host: IP ? IP : "localhost",
     port: PORT ? PORT : 50541
@@ -12,14 +14,16 @@ const connect = function() {
     console.log("🚀 ~ file: connect.js:12 ~ conn.on ~ message:", message);
     console.log('Client connected to server');
 
-    conn.write("Name: ___");
-    // const id = setInterval(() => {
-    //   conn.write("Move: right");
+    const rl = readLine.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
 
-    // }, 50);
-    // setTimeout(() => {
-    //   clearInterval(id);
-    // }, 5000);
+    rl.question('Enter your name: ', (name) => {
+      conn.write("Name: " + name); // Send the name to the server
+      rl.close(); // Close the readline interface
+      callback(conn); // Call the callback function with the established connection
+    });
   });
 
   conn.on("data", (data) => {
