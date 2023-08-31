@@ -18,21 +18,17 @@ const handleUserInput = function(key) {
 
   // Movements
   if (MOVE_UP_KEY.includes(key)) {
-    // connection.write("Move: up");
     constantMoving('up');
   }
   if (MOVE_LEFT_KEY.includes(key)) {
-    // connection.write("Move: left");
     constantMoving('left');
 
   }
   if (MOVE_DOWN_KEY.includes(key)) {
-    // connection.write("Move: down");
     constantMoving('down');
 
   }
-  if (key === 'd' || key === 'D') {
-    // connection.write("Move: right");
+  if (MOVE_RIGHT_KEY.includes(key)) {
     constantMoving('right');
   }
 
